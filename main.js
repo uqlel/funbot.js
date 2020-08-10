@@ -5,12 +5,12 @@ const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
- if (command === "gif"){
+  if (command === "gif"){
     var url = 'http://api.giphy.com/v1/gifs/random?api_key=yPU9btxDmzgEk8ZXhmO3gaOcROfROZH0&tag=meme';
 
 http.get(url, function(res){
@@ -43,7 +43,7 @@ http.get(url, function(res){
     .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
   message.channel.send(helpembed);
 }
-else if (command === "polishmeme"){
+  else if (command === "polishmeme"){
   var url = 'http://meme-api.herokuapp.com/gimme/polish_memes';
 
 http.get(url, function(res){
@@ -93,7 +93,7 @@ http.get(url, function(res){
     console.log("Got an error: ", e);
 });
 }
- else if(command === `ping`) {
+  else if(command === `ping`) {
          var embed = new Discord.MessageEmbed()
         .setAuthor(`Obliczanie pingu...`)
         .setColor("111")
@@ -107,6 +107,24 @@ http.get(url, function(res){
             m.edit(embed)
         });
     }
+  else if(command === `borsuk`){
+    try{
+      const res = await axios({
+          url: 'https://multiapp.xyz/api/images/badgers',
+          headers: {
+              token: "Sddv5AW1DoyS47QcFzKSQF"
+          }
+      })
+      const embed = new Discord.MessageEmbed()
+          .setTitle('Borsuk')
+          .setImage(res.data.url)
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          .setTimestamp()
+      message.channel.send(embed)
+  }catch(err){
+      message.channel.send(`Błąd w wysyłaniu. Zgłoś się do **! uQlel#9256**. Treść błędu: ${err.message}`)
+  }
+}
 });
 
 client.on('ready', () => {
