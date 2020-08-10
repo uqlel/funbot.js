@@ -120,6 +120,7 @@ http.get(url, function(res){
 });
 client.on('ready', () => {
     console.log(`Zalogowano jako: ${client.user.tag}!`);
+    client.user.setActivity('$help', {type: 'LISTENING'})
   });
 
 client.login(token);
