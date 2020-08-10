@@ -19,10 +19,8 @@ client.on('message', message => {
   let seconds = date_ob.getSeconds();
 
   
-	if (command === 'ping') {
-		message.channel.send('Pong.');
-	} 
-	else if (command === "gif"){
+
+ if (command === "gif"){
     var url = 'http://api.giphy.com/v1/gifs/random?api_key=yPU9btxDmzgEk8ZXhmO3gaOcROfROZH0&tag=meme';
 
 http.get(url, function(res){
@@ -49,14 +47,79 @@ http.get(url, function(res){
   else if (command === "help"){
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`,`$meme`\n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`,`$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
     .setColor("111")
     .setTimestamp()
     .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
   message.channel.send(helpembed);
 }
-});
+else if (command === "polishmeme"){
+  var url = 'http://meme-api.herokuapp.com/gimme/polish_memes';
 
+http.get(url, function(res){
+  var body = '';
+
+  res.on('data', function(chunk){
+      body += chunk;
+  });
+
+  res.on('end', function(){
+      var memresponse = JSON.parse(body);
+      const memembed = new Discord.MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('POLSKI MEM: ' + memresponse.title)
+      .setDescription ("Link: " + memresponse.postLink)
+      .setImage(memresponse.url)
+      .setTimestamp()
+      .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+      message.channel.send(memembed);
+  });
+}).on('error', function(e){
+    console.log("Got an error: ", e);
+});
+}
+  else if (command === "meme"){
+  var url = 'http://meme-api.herokuapp.com/gimme/memes';
+
+http.get(url, function(res){
+  var body = '';
+
+  res.on('data', function(chunk){
+      body += chunk;
+  });
+
+  res.on('end', function(){
+      var memresponse = JSON.parse(body);
+      const memembed = new Discord.MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('MEM: ' + memresponse.title)
+      .setDescription ("Link: " + memresponse.postLink)
+      .setImage(memresponse.url)
+      .setTimestamp()
+      .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+      message.channel.send(memembed);
+  });
+}).on('error', function(e){
+    console.log("Got an error: ", e);
+});
+}
+ else if(command === `ping`) {
+  
+  // It sends the user "Pinging"
+        message.channel.send("Obliczanie pingu...").then(m =>{
+          // The math thingy to calculate the user's ping
+            var ping = m.createdTimestamp - message.createdTimestamp;
+
+          // Basic embed
+            var embed = new Discord.MessageEmbed()
+            .setAuthor(`Pong! Twój ping to: ${ping} ms`)
+            .setColor("111")
+            
+            // Then It Edits the message with the ping variable embed that you created
+            m.edit(embed)
+        });
+    }
+});
 client.on('ready', () => {
     console.log(`Zalogowano jako: ${client.user.tag}!`);
   });
