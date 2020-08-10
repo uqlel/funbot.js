@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const http = require('http');
+const axios = require('axios');
 const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
@@ -9,17 +10,6 @@ client.on('message', message => {
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
-  
-  let date_ob = new Date();
-  let date = ("0" + date_ob.getDate()).slice(-2);
-  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-  let year = date_ob.getFullYear();
-  let hours = date_ob.getHours();
-  let minutes = date_ob.getMinutes();
-  let seconds = date_ob.getSeconds();
-
-  
-
  if (command === "gif"){
     var url = 'http://api.giphy.com/v1/gifs/random?api_key=yPU9btxDmzgEk8ZXhmO3gaOcROfROZH0&tag=meme';
 
@@ -118,6 +108,7 @@ http.get(url, function(res){
         });
     }
 });
+
 client.on('ready', () => {
     console.log(`Zalogowano jako: ${client.user.tag}!`);
     client.user.setActivity('$help', {type: 'LISTENING'})
