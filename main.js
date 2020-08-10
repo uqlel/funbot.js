@@ -104,18 +104,16 @@ http.get(url, function(res){
 });
 }
  else if(command === `ping`) {
-  
-  // It sends the user "Pinging"
-        message.channel.send("Obliczanie pingu...").then(m =>{
-          // The math thingy to calculate the user's ping
+         var embed = new Discord.MessageEmbed()
+        .setAuthor(`Obliczanie pingu...`)
+        .setColor("111")
+        message.channel.send(embed).then(m =>{
             var ping = m.createdTimestamp - message.createdTimestamp;
-
-          // Basic embed
             var embed = new Discord.MessageEmbed()
             .setAuthor(`Pong! Twój ping to: ${ping} ms`)
             .setColor("111")
             
-            // Then It Edits the message with the ping variable embed that you created
+            
             m.edit(embed)
         });
     }
