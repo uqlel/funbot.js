@@ -40,7 +40,9 @@ http.get(url, function(res){
     .setDescription("**:laughing: Zabawne:** \n `$gif`,`$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
     .setColor("111")
     .setTimestamp()
-    .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+    .setAuthor(message.author.tag)
+    .setThumbnail(message.author.displayAvatarURL())
+    .setFooter("Twórca bota: ! uQlel#9256", "https://cdn.discordapp.com/avatars/601711693172572170/f46b3e942452467038764ca694cffa26.png?size=1024")
   message.channel.send(helpembed);
 }
   else if (command === "polishmeme"){
@@ -125,6 +127,15 @@ http.get(url, function(res){
       message.channel.send(`Błąd w wysyłaniu. Zgłoś się do **! uQlel#9256**. Treść błędu: ${err.message}`)
   }
 }
+  else if(command === `supreme`){
+    const text = message.content.replace(prefix + "supreme " , "")
+    const link = "https://api.alexflipnote.dev/supreme?text=" + text.replace(" " , "+" )
+    const embed = new Discord.MessageEmbed()
+    .setTitle("Supreme")
+    .setImage(link)
+    .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+   message.channel.send(embed)
+  }
 });
 
 client.on('ready', () => {
