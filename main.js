@@ -37,7 +37,7 @@ http.get(url, function(res){
   else if (command === "help"){
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`,`$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
     .setColor("111")
     .setTimestamp()
     .setAuthor(message.author.tag)
@@ -132,6 +132,15 @@ http.get(url, function(res){
     const link = "https://api.alexflipnote.dev/supreme?text=" + text.replace(" " , "+" )
     const embed = new Discord.MessageEmbed()
     .setTitle("Supreme")
+    .setImage(link)
+    .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+   message.channel.send(embed)
+  }
+  else if(command === `captcha`){
+    const text = message.content.replace(prefix + "captcha " , "")
+    const link = "https://api.alexflipnote.dev/captcha?text=" + text.replace(" " , "+" )
+    const embed = new Discord.MessageEmbed()
+    .setTitle("Captcha")
     .setImage(link)
     .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
    message.channel.send(embed)
