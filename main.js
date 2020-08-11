@@ -145,11 +145,61 @@ http.get(url, function(res){
     .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
    message.channel.send(embed)
   }
-});
+  else if (command === `kick`) {
+    const user = message.mentions.users.first();
+    if (user) {
+      const member = message.guild.member(user);
+      if (member) {
+        member
+          .kick('Optional reason that will display in the audit logs')
+          .then(() => {
+            const embed = new Discord.MessageEmbed()
+            .setTitle("Kick")
+            .setDescription(`✔ Wyrzucono ${user.tag}!`)
+            .setColor("GREEN")
+            .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+            message.channel.send(embed);
+          })
+          .catch(err => {
+            // An error happened
+            // This is generally due to the bot not being able to kick the member,
+            // either due to missing permissions or role hierarchy
+            const embed = new Discord.MessageEmbed()
+            .setTitle("Kick")
+            .setDescription(`✖ Nie mogę wyrzucić ${user.tag}!`)
+            .setColor("DARK_RED")
+            .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+            message.channel.send(embed);
+            // Log the error
+            console.error(err);
+          });
+      } else {
+        const embed = new Discord.MessageEmbed()
+        .setTitle("Kick")
+        .setDescription(`✖ Nie ma tej osoby na tym serwerze!`)
+        .setColor("DARK_RED")
+        .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+        message.channel.send(embed);
+      }
+    } else {
+      const embed = new Discord.MessageEmbed()
+      .setTitle("Kick")
+      .setDescription(` Wyrzucono ${user.tag}!`)
+      .setColor("DARK_RED")
+      .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+      message.channel.send(embed);
+    }
+  }
+  });
 
 client.on('ready', () => {
     console.log(`Zalogowano jako: ${client.user.tag}!`);
-    client.user.setActivity('$help', {type: 'LISTENING'})
+    client.user.setActivity(`$help | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
+  });
+  client.on("guildCreate", guild => {
+    // This event triggers when the bot joins a guild.
+    console.log(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków!`);
+    client.user.setActivity(`$help | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
   });
 
 client.login(token);
