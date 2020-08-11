@@ -18,7 +18,7 @@ client.on('message', async message => {
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
-  if (command === "gif"){
+  if(command === "gif"){
     var url = 'http://api.giphy.com/v1/gifs/random?api_key=yPU9btxDmzgEk8ZXhmO3gaOcROfROZH0&tag=meme';
 
 http.get(url, function(res){
@@ -42,10 +42,10 @@ http.get(url, function(res){
       console.log("Got an error: ", e);
 });
   }
-  else if (command === "help"){
+  else if(command === "help"){
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n<:reddit:742766045340631070> Reddit: \n `$randompost [subreddit]`, `$dank`, `$pewdiepie`, `$cringe` `$eyebleach` \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
     .setColor("111")
     .setTimestamp()
     .setAuthor(message.author.tag)
@@ -53,7 +53,7 @@ http.get(url, function(res){
     .setFooter("Twórca bota: ! uQlel#9256", "https://cdn.discordapp.com/avatars/601711693172572170/f46b3e942452467038764ca694cffa26.png?size=1024")
   message.channel.send(helpembed);
   }
-  else if (command === "polishmeme"){
+  else if(command === "polishmeme"){
   var url = 'http://meme-api.herokuapp.com/gimme/memy';
 
 http.get(url, function(res){
@@ -78,7 +78,7 @@ http.get(url, function(res){
     console.log("Got an error: ", e);
 });
   }
-  else if (command === "meme"){
+  else if(command === "meme"){
   var url = 'http://meme-api.herokuapp.com/gimme/memes';
 
 http.get(url, function(res){
@@ -153,7 +153,7 @@ http.get(url, function(res){
     .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
    message.channel.send(embed)
   }
-  else if (command === `kick`) {
+  else if(command === `kick`) {
     const user = message.mentions.users.first();
     if (user) {
       const member = message.guild.member(user);
@@ -198,7 +198,7 @@ http.get(url, function(res){
       message.channel.send(embed);
     }
   }
-  else if (command === `ban`) {
+  else if(command === `ban`) {
     const user = message.mentions.users.first();
     if (user) {
       const member = message.guild.member(user);
@@ -243,7 +243,7 @@ http.get(url, function(res){
       message.channel.send(embed);
     }
   }
-  else if (command === `invite`){
+  else if(command === `invite`){
     const embed = new Discord.MessageEmbed()
     .setTitle("Linki")
     .addField(":link: Dodaj bota", " [Kliknij tutaj](https://discord.com/oauth2/authorize?client_id=686128717826752532&permissions=8&scope=bot) aby dodać bota na serwer")
@@ -251,6 +251,132 @@ http.get(url, function(res){
     .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
     .setTimestamp()
     message.channel.send(embed)
+  }
+  else if(command === `randompost`){
+    const subreddit = message.content.replace(prefix + "randompost ", "" ,)
+    var url = `http://meme-api.herokuapp.com/gimme/${subreddit}`;
+
+    http.get(url, function(res){
+      var body = '';
+    
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+    
+      res.on('end', function(){
+          var redditresponse = JSON.parse(body);
+          const embed = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle(`/r/${subreddit}/: ${redditresponse.title}`)
+          .setDescription ("Link: " + redditresponse.postLink)
+          .setImage(redditresponse.url)
+          .setTimestamp()
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          message.channel.send(embed);
+      });
+    }).on('error', function(e){
+        console.log("Got an error: ", e);
+    });
+  }
+  else if(command === `dank`){
+    var url = 'http://meme-api.herokuapp.com/gimme/dankmemes';
+
+    http.get(url, function(res){
+      var body = '';
+    
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+    
+      res.on('end', function(){
+          var memresponse = JSON.parse(body);
+          const memembed = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle('/r/dankmemes/: ' + memresponse.title)
+          .setDescription ("Link: " + memresponse.postLink)
+          .setImage(memresponse.url)
+          .setTimestamp()
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          message.channel.send(memembed);
+      });
+    }).on('error', function(e){
+        console.log("Got an error: ", e);
+    });
+  }
+  else if(command === `pewdiepie`){
+    var url = 'http://meme-api.herokuapp.com/gimme/pewdiepiesubmissions';
+
+    http.get(url, function(res){
+      var body = '';
+    
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+    
+      res.on('end', function(){
+          var memresponse = JSON.parse(body);
+          const memembed = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle('/r/pewdiepiesubmissions/: ' + memresponse.title)
+          .setDescription ("Link: " + memresponse.postLink)
+          .setImage(memresponse.url)
+          .setTimestamp()
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          message.channel.send(memembed);
+      });
+    }).on('error', function(e){
+        console.log("Got an error: ", e);
+    });
+  }
+  else if(command === `cringe`){
+    var url = 'http://meme-api.herokuapp.com/gimme/cringe';
+
+    http.get(url, function(res){
+      var body = '';
+    
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+    
+      res.on('end', function(){
+          var memresponse = JSON.parse(body);
+          const memembed = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle('/r/cringe/: ' + memresponse.title)
+          .setDescription ("Link: " + memresponse.postLink)
+          .setImage(memresponse.url)
+          .setTimestamp()
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          message.channel.send(memembed);
+      });
+    }).on('error', function(e){
+        console.log("Got an error: ", e);
+    });
+  }
+  else if(command === `eyebleach`){
+    var url = 'http://meme-api.herokuapp.com/gimme/eyebleach';
+
+    http.get(url, function(res){
+      var body = '';
+    
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+    
+      res.on('end', function(){
+          var memresponse = JSON.parse(body);
+          const memembed = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle('/r/eyebleach/: ' + memresponse.title)
+          .setDescription ("Link: " + memresponse.postLink)
+          .setImage(memresponse.url)
+          .setTimestamp()
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          message.channel.send(memembed);
+      });
+    }).on('error', function(e){
+        console.log("Got an error: ", e);
+    });
   }
   });
 
