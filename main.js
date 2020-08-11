@@ -45,7 +45,7 @@ http.get(url, function(res){
   else if(command === "help"){
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n<:reddit:742766045340631070> Reddit: \n `$randompost [subreddit]`, `$dank`, `$pewdiepie`, `$cringe`, `$eyebleach` \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n<:reddit:742766045340631070> Reddit: \n `$randompost [subreddit]`, `$dank`, `$pewdiepie`, `$eyebleach` \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
     .setColor("111")
     .setTimestamp()
     .setAuthor(message.author.tag)
@@ -318,31 +318,6 @@ http.get(url, function(res){
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/pewdiepiesubmissions/: ' + memresponse.title)
-          .setDescription ("Link: " + memresponse.postLink)
-          .setImage(memresponse.url)
-          .setTimestamp()
-          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
-          message.channel.send(memembed);
-      });
-    }).on('error', function(e){
-        console.log("Got an error: ", e);
-    });
-  }
-  else if(command === `cringe`){
-    var url = 'http://meme-api.herokuapp.com/gimme/cringe';
-
-    http.get(url, function(res){
-      var body = '';
-    
-      res.on('data', function(chunk){
-          body += chunk;
-      });
-    
-      res.on('end', function(){
-          var memresponse = JSON.parse(body);
-          const memembed = new Discord.MessageEmbed()
-          .setColor('#0099ff')
-          .setTitle('/r/cringe/: ' + memresponse.title)
           .setDescription ("Link: " + memresponse.postLink)
           .setImage(memresponse.url)
           .setTimestamp()
