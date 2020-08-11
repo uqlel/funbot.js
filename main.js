@@ -5,6 +5,14 @@ const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client();
 
+client.on('guildMemberAdd', member => {
+  const channel = member.guild.channels.cache.find(ch => ch.name === 'witamy');
+  if (!channel) return;
+  const embed = new Discord.MessageEmbed
+  channel.send(`Welcome to the server, ${member}`);
+});
+
+
 client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -37,7 +45,7 @@ http.get(url, function(res){
   else if (command === "help"){
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n  **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
     .setColor("111")
     .setTimestamp()
     .setAuthor(message.author.tag)
@@ -151,7 +159,7 @@ http.get(url, function(res){
       const member = message.guild.member(user);
       if (member) {
         member
-          .kick('Optional reason that will display in the audit logs')
+          .kick("Wyrzucono przez" + message.author.tag + " (ID: " + message.author + " )")
           .then(() => {
             const embed = new Discord.MessageEmbed()
             .setTitle("Kick")
@@ -184,7 +192,52 @@ http.get(url, function(res){
     } else {
       const embed = new Discord.MessageEmbed()
       .setTitle("Kick")
-      .setDescription(` Wyrzucono ${user.tag}!`)
+      .setDescription(`✖ Nie oznaczyłeś osoby do wyrzucenia!`)
+      .setColor("DARK_RED")
+      .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+      message.channel.send(embed);
+    }
+  }
+  else if (command === `ban`) {
+    const user = message.mentions.users.first();
+    if (user) {
+      const member = message.guild.member(user);
+      if (member) {
+        member
+          .ban({reason: "Zbanowano przez" + message.author.tag + "(ID:" + message.author + ")"})
+          .then(() => {
+            const embed = new Discord.MessageEmbed()
+            .setTitle("Ban")
+            .setDescription(`✔ Zbanowano ${user.tag}!`)
+            .setColor("GREEN")
+            .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+            message.channel.send(embed);
+          })
+          .catch(err => {
+            // An error happened
+            // This is generally due to the bot not being able to kick the member,
+            // either due to missing permissions or role hierarchy
+            const embed = new Discord.MessageEmbed()
+            .setTitle("Ban")
+            .setDescription(`✖ Nie mogę zbanować ${user.tag}!`)
+            .setColor("DARK_RED")
+            .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+            message.channel.send(embed);
+            // Log the error
+            console.error(err);
+          });
+      } else {
+        const embed = new Discord.MessageEmbed()
+        .setTitle("Ban")
+        .setDescription(`✖ Nie ma tej osoby na tym serwerze!`)
+        .setColor("DARK_RED")
+        .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+        message.channel.send(embed);
+      }
+    } else {
+      const embed = new Discord.MessageEmbed()
+      .setTitle("Ban")
+      .setDescription(`✖ Nie oznaczyłeś osoby do zbanowania!`)
       .setColor("DARK_RED")
       .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
       message.channel.send(embed);
