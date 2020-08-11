@@ -45,14 +45,14 @@ http.get(url, function(res){
   else if (command === "help"){
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n  **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping` ")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
     .setColor("111")
     .setTimestamp()
     .setAuthor(message.author.tag)
     .setThumbnail(message.author.displayAvatarURL())
     .setFooter("Twórca bota: ! uQlel#9256", "https://cdn.discordapp.com/avatars/601711693172572170/f46b3e942452467038764ca694cffa26.png?size=1024")
   message.channel.send(helpembed);
-}
+  }
   else if (command === "polishmeme"){
   var url = 'http://meme-api.herokuapp.com/gimme/memy';
 
@@ -77,7 +77,7 @@ http.get(url, function(res){
 }).on('error', function(e){
     console.log("Got an error: ", e);
 });
-}
+  }
   else if (command === "meme"){
   var url = 'http://meme-api.herokuapp.com/gimme/memes';
 
@@ -102,7 +102,7 @@ http.get(url, function(res){
 }).on('error', function(e){
     console.log("Got an error: ", e);
 });
-}
+  }
   else if(command === `ping`) {
          var embed = new Discord.MessageEmbed()
         .setAuthor(`Obliczanie pingu...`)
@@ -116,7 +116,7 @@ http.get(url, function(res){
             
             m.edit(embed)
         });
-    }
+  }
   else if(command === `borsuk`){
     try{
       const res = await axios({
@@ -134,7 +134,7 @@ http.get(url, function(res){
   }catch(err){
       message.channel.send(`Błąd w wysyłaniu. Zgłoś się do **! uQlel#9256**. Treść błędu: ${err.message}`)
   }
-}
+  }
   else if(command === `supreme`){
     const text = message.content.replace(prefix + "supreme ", "" ,)
     const link = "https://api.alexflipnote.dev/supreme?text=" + text.replace(/ /g , "+" )
@@ -242,6 +242,15 @@ http.get(url, function(res){
       .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
       message.channel.send(embed);
     }
+  }
+  else if (command === `invite`){
+    const embed = new Discord.MessageEmbed()
+    .setTitle("Linki")
+    .addField(":link: Dodaj bota", " [Kliknij tutaj](https://discord.com/oauth2/authorize?client_id=686128717826752532&permissions=8&scope=bot) aby dodać bota na serwer")
+    .addField(":link: Serwer support", " [Kliknij tutaj](https://discord.gg/8jxajwq) aby dołączyć!")
+    .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+    .setTimestamp()
+    message.channel.send(embed)
   }
   });
 
