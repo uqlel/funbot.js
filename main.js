@@ -54,7 +54,7 @@ http.get(url, function(res){
   message.channel.send(helpembed);
 }
   else if (command === "polishmeme"){
-  var url = 'http://meme-api.herokuapp.com/gimme/polish_memes';
+  var url = 'http://meme-api.herokuapp.com/gimme/memy';
 
 http.get(url, function(res){
   var body = '';
@@ -136,8 +136,8 @@ http.get(url, function(res){
   }
 }
   else if(command === `supreme`){
-    const text = message.content.replace(prefix + "supreme " , "")
-    const link = "https://api.alexflipnote.dev/supreme?text=" + text.replace(" " , "+" )
+    const text = message.content.replace(prefix + "supreme ", "" ,)
+    const link = "https://api.alexflipnote.dev/supreme?text=" + text.replace(/ /g , "+" )
     const embed = new Discord.MessageEmbed()
     .setTitle("Supreme")
     .setImage(link)
@@ -146,7 +146,7 @@ http.get(url, function(res){
   }
   else if(command === `captcha`){
     const text = message.content.replace(prefix + "captcha " , "")
-    const link = "https://api.alexflipnote.dev/captcha?text=" + text.replace(" " , "+" )
+    const link = "https://api.alexflipnote.dev/captcha?text=" + text.replace(/ /g, "+" )
     const embed = new Discord.MessageEmbed()
     .setTitle("Captcha")
     .setImage(link)
