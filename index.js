@@ -8,7 +8,7 @@ let ts = Date.now();
 client.on('message', message => { 
   
 if (message.mentions.has(client.user)) {
-  fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: @mention, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+  fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: @mention, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
     if (err) throw err;
 
 })
@@ -28,7 +28,7 @@ client.on('message', async message => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
   if(command === "gif"){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: GIF, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: GIF, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -56,7 +56,7 @@ http.get(url, function(res){
 });
   }
   else if(command === "help"){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: HELP, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: HELP, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -71,7 +71,7 @@ http.get(url, function(res){
   message.channel.send(helpembed);
   }
   else if(command === "polishmeme"){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: POLISHMEME, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: POLISHMEME, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -100,7 +100,7 @@ http.get(url, function(res){
 });
   }
   else if(command === "meme"){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: MEME, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: MEME, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -129,7 +129,7 @@ http.get(url, function(res){
 });
   }
   else if(command === `ping`) {
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: PING, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: PING, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -147,7 +147,7 @@ http.get(url, function(res){
         });
   }
   else if(command === `borsuk`){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: BORSUK, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: BORSUK, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -170,7 +170,7 @@ http.get(url, function(res){
   }
   else if(command === `supreme`){
     const text = message.content.replace(prefix + "supreme ", "" ,)
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: SUPREME (TEXT: ${text}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: SUPREME (TEXT: ${text}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -183,7 +183,7 @@ http.get(url, function(res){
   }
   else if(command === `captcha`){
     const text = message.content.replace(prefix + "captcha " , "")
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: CAPTCHA (Text: ${text}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: CAPTCHA (Text: ${text}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -198,7 +198,7 @@ http.get(url, function(res){
     const user = message.mentions.users.first();
     if (user) {
       const member = message.guild.member(user);
-      fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: KICK (Member: ${user.tag} ID: ${user}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+      fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: KICK (Member: ${user.tag} ID: ${user}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
         if (err) throw err;
     
     })
@@ -245,7 +245,7 @@ http.get(url, function(res){
   }
   else if(command === `ban`) {
     const user = message.mentions.users.first();
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: BAN (Member: ${user.tag} ID: ${user}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: BAN (Member: ${user.tag} ID: ${user}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -293,7 +293,7 @@ http.get(url, function(res){
     }
   }
   else if(command === `invite`){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: INVITE, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: INVITE, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -307,7 +307,7 @@ http.get(url, function(res){
   }
   else if(command === `randompost`){
     const subreddit = message.content.replace(prefix + "randompost ", "" ,)
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: RANDOMPOST (/r/${subreddit}/), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: RANDOMPOST (/r/${subreddit}/), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -336,7 +336,7 @@ http.get(url, function(res){
     });
   }
   else if(command === `dank`){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: DANKMEME, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: DANKMEME, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -365,7 +365,7 @@ http.get(url, function(res){
     });
   }
   else if(command === `pewdiepie`){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: PEWDIEPIE, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: PEWDIEPIE, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -394,7 +394,7 @@ http.get(url, function(res){
     });
   }
   else if(command === `eyebleach`){
-    fs.appendFile('~/funbot-logs/command.log', `\n ${ts} Command: EYEBLEACH, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: EYEBLEACH, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
   
   })
@@ -426,7 +426,7 @@ http.get(url, function(res){
 
 client.on('ready', () => {
     console.log(`Zalogowano jako: ${client.user.tag}!`);
-    fs.appendFile('~/funbot-logs/boot.log', `\n ${ts} Bot został włączony!`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/boot.log', `\n ${ts} Bot został włączony!`, (err) => {
       if (err) throw err;
   
   })
@@ -445,7 +445,7 @@ client.on('ready', () => {
   }).then(invite => {
     console.log(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`);
     client.user.setActivity(`$help | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
-    fs.appendFile('~/funbot-logs/server.log', `\n${ts}Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`, (err) => {
+    fs.appendFile('/home/julek/funbot-logs/server.log', `\n${ts}Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`, (err) => {
       if (err) throw err;
   
   })
