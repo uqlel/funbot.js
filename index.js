@@ -4,8 +4,18 @@ const axios = require('axios');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 const fs = require('fs');
-
-
+client.on('message', message => { 
+if (message.mentions.has(client.user)) {
+  const embed = new Discord.MessageEmbed()
+  .setTitle("Informacje o bocie")
+  .addField("Prefix bota:", prefix)
+  .addField("Dostępne komendy:", `${prefix}help`)
+  .addField("Serwery:", client.guilds.cache.size)
+  .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+  .setTimestamp()
+  message.channel.send(embed)
+}
+});
 client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -354,8 +364,19 @@ client.on('ready', () => {
   });
   client.on("guildCreate", guild => {
     // This event triggers when the bot joins a guild.
-    console.log(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków!`);
+     // Filtering the channels to get only the text channels.
+  const Channels = guild.channels.cache.filter(channel => channel.type == "text");
+
+  // Creating an invite.
+  Channels.first().createInvite({
+      maxUses: 0,
+      maxAge: 0,
+      unique: true
+  }).then(invite => {
+    console.log(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`);
     client.user.setActivity(`$help | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
+  
+  })
   });
 
 client.login(token);
