@@ -4,14 +4,16 @@ const axios = require('axios');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 const fs = require('fs');
+
 let date_ob = new Date();
-let date = this.IntTwoChars(date_ob.getDate());
-let month = this.IntTwoChars(date_ob.getMonth() + 1);
+let date = ("0" + date_ob.getDate()).slice(-2);
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 let year = date_ob.getFullYear();
-let hours = this.IntTwoChars(date_ob.getHours());
-let minutes = this.IntTwoChars(date_ob.getMinutes());
-let seconds = this.IntTwoChars(date_ob.getSeconds());
+let hours = date_ob.getHours();
+let minutes = date_ob.getMinutes();
+let seconds = date_ob.getSeconds();
 let ts = `${hours}:${minutes}:${seconds} ${month}/${date}/${year}`;
+
 client.on('message', message => { 
   
 if (message.mentions.has(client.user)) {
