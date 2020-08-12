@@ -204,6 +204,15 @@ http.get(url, function(res){
    message.channel.send(embed)
   }
   else if(command === `kick`) {
+    if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.guild.me.hasPermmission('KICK')){
+      const embed = new Discord.MessageEmbed()
+      .setTitle("Kick")
+      .setDescription(`✖ Nie posiadasz permisji do wyrzucania!`)
+      .setColor("DARK_RED")
+      .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+      message.channel.send(embed);
+      return;
+    }
     const user = message.mentions.users.first();
     if (user) {
       const member = message.guild.member(user);
@@ -253,6 +262,15 @@ http.get(url, function(res){
     }
   }
   else if(command === `ban`) {
+    if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.guild.me.hasPermmission('BAN')){
+      const embed = new Discord.MessageEmbed()
+      .setTitle("Ban")
+      .setDescription(`✖ Nie posiadasz permisji do banowania!`)
+      .setColor("DARK_RED")
+      .setFooter("Komenda wywołana przez: " + message.author.tag , message.author.displayAvatarURL())
+      message.channel.send(embed);
+      return;
+    }
     const user = message.mentions.users.first();
     fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: BAN (Member: ${user.tag} ID: ${user}), Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
       if (err) throw err;
