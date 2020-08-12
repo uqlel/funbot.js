@@ -2,15 +2,8 @@ const Discord = require('discord.js');
 const http = require('http');
 const axios = require('axios');
 const { prefix, token } = require('./config.json');
-
 const client = new Discord.Client();
-
-client.on('guildMemberAdd', member => {
-  const channel = member.guild.channels.cache.find(ch => ch.name === 'witamy');
-  if (!channel) return;
-  const embed = new Discord.MessageEmbed
-  channel.send(`Welcome to the server, ${member}`);
-});
+const fs = require('fs');
 
 
 client.on('message', async message => {
