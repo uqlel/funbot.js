@@ -204,7 +204,7 @@ http.get(url, function(res){
    message.channel.send(embed)
   }
   else if(command === `kick`) {
-    if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.guild.me.hasPermmission('KICK')){
+    if(message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermmission('KICK')){
     }
     else{
       const embed = new Discord.MessageEmbed()
@@ -264,7 +264,7 @@ http.get(url, function(res){
     }
   }
   else if(command === `ban`) {
-    if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.guild.me.hasPermmission('BAN')){
+    if(message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermmission('BAN')){
     }
     else{
       const embed = new Discord.MessageEmbed()
