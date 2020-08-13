@@ -205,6 +205,8 @@ http.get(url, function(res){
   }
   else if(command === `kick`) {
     if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.guild.me.hasPermmission('KICK')){
+    }
+    else{
       const embed = new Discord.MessageEmbed()
       .setTitle("Kick")
       .setDescription(`✖ Nie posiadasz permisji do wyrzucania!`)
@@ -263,6 +265,8 @@ http.get(url, function(res){
   }
   else if(command === `ban`) {
     if(message.member.guild.me.hasPermission('ADMINISTRATOR') || message.member.guild.me.hasPermmission('BAN')){
+    }
+    else{
       const embed = new Discord.MessageEmbed()
       .setTitle("Ban")
       .setDescription(`✖ Nie posiadasz permisji do banowania!`)
