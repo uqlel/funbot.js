@@ -475,7 +475,7 @@ client.on('ready', () => {
       unique: true
   }).then(invite => {
     console.log(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`);
-    client.user.setActivity(`$help | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
+    client.user.setActivity(`@funbot.js | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
     fs.appendFile('/home/julek/funbot-logs/server.log', `\n${ts}Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`, (err) => {
       if (err) throw err;
   
