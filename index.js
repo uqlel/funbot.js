@@ -204,7 +204,7 @@ http.get(url, function(res){
    message.channel.send(embed)
   }
   else if(command === `kick`) {
-    if(message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermmission('KICK')){
+    if(message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermmission('KICK_MEMBERS')){
     }
     else{
       const embed = new Discord.MessageEmbed()
@@ -264,7 +264,7 @@ http.get(url, function(res){
     }
   }
   else if(command === `ban`) {
-    if(message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermmission('BAN')){
+    if(message.member.hasPermission('ADMINISTRATOR') || message.member.hasPermmission('BAN_MEMBERS')){
     }
     else{
       const embed = new Discord.MessageEmbed()
