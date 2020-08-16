@@ -124,6 +124,19 @@ http.get(url, function(res){
 
   res.on('end', function(){
       var memresponse = JSON.parse(body);
+      if(message.channel.nsfw === false){
+        if(memresponse.nsfw === true){
+          const embed = new Discord.MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle(`MEM: ${memresponse.title}`)
+          .setDescription ("NSFW: Potwierdź że masz 18 lat lub powyżej: " + memresponse.postLink)
+          .setTimestamp()
+          .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+          message.channel.send(embed);
+          return;
+        }
+      }
+        
       const memembed = new Discord.MessageEmbed()
       .setColor('#0099ff')
       .setTitle('MEM: ' + memresponse.title)
@@ -343,6 +356,18 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var redditresponse = JSON.parse(body);
+          if(message.channel.nsfw === false){
+          if(redditresponse.nsfw === true){
+            const embed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle(`/r/${subreddit}/: ${redditresponse.title}`)
+            .setDescription ("NSFW: Potwierdź że masz 18 lat lub powyżej: " + redditresponse.postLink)
+            .setTimestamp()
+            .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+            message.channel.send(embed);
+            return;
+          }
+        }
           const embed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle(`/r/${subreddit}/: ${redditresponse.title}`)
@@ -372,6 +397,18 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var memresponse = JSON.parse(body);
+          if(message.channel.nsfw === false){
+            if(memresponse.nsfw === true){
+              const embed = new Discord.MessageEmbed()
+              .setColor('#0099ff')
+              .setTitle(`/r/dankmemes/: ${memresponse.title}`)
+              .setDescription ("NSFW: Potwierdź że masz 18 lat lub powyżej: " + memresponse.postLink)
+              .setTimestamp()
+              .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+              message.channel.send(embed);
+              return;
+            }
+          }
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/dankmemes/: ' + memresponse.title)
@@ -401,6 +438,18 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var memresponse = JSON.parse(body);
+          if(message.channel.nsfw === false){
+            if(memresponse.nsfw === true){
+              const embed = new Discord.MessageEmbed()
+              .setColor('#0099ff')
+              .setTitle(`/r/${subreddit}/: ${memresponse.title}`)
+              .setDescription ("NSFW: Potwierdź że masz 18 lat lub powyżej: " + memresponse.postLink)
+              .setTimestamp()
+              .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+              message.channel.send(embed);
+              return;
+            }
+          }
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/pewdiepiesubmissions/: ' + memresponse.title)
@@ -430,6 +479,19 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var memresponse = JSON.parse(body);
+          if(message.channel.nsfw === false){
+            if(memresponse.nsfw === true){
+              const embed = new Discord.MessageEmbed()
+              .setColor('#0099ff')
+              .setTitle(`/r/eyebleach/: ${memresponse.title}`)
+              .setDescription ("NSFW: Potwierdź że masz 18 lat lub powyżej: " + redditresponse.postLink)
+              .setTimestamp()
+              .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+              message.channel.send(embed);
+              return;
+            }
+          }
+            c
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/eyebleach/: ' + memresponse.title)
