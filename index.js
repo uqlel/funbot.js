@@ -356,7 +356,7 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var redditresponse = JSON.parse(body);
-          if(message.channel.nsfw === false){
+
           if(redditresponse.nsfw === true){
             const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
@@ -367,7 +367,6 @@ http.get(url, function(res){
             message.channel.send(embed);
             return;
           }
-        }
           const embed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle(`/r/${subreddit}/: ${redditresponse.title}`)
