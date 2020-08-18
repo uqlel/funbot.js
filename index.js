@@ -57,7 +57,7 @@ http.get(url, function(res){
         .setTitle('GIF')
         .setImage(giphyresponse.data.image_url)
         .setTimestamp()
-        .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+        .setFooter("Komenda wywołana przez: " + message.author.tag + "| Powered by GIPHY", message.author.displayAvatarURL())
         message.channel.send(gifembed);
     });
 }).on('error', function(e){
