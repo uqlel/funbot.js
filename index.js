@@ -490,7 +490,6 @@ http.get(url, function(res){
               return;
             }
           }
-            c
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/eyebleach/: ' + memresponse.title)
