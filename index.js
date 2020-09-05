@@ -14,7 +14,7 @@ let minutes = date_ob.getMinutes();
 let seconds = date_ob.getSeconds();
 let ts = `${hours}:${minutes}:${seconds} ${month}/${date}/${year}`;
 
-client.on('message', message => { 
+client.on('message', async message => { 
   
 if (message.mentions.has(client.user)) {
   if (message.content.has("@here")) return;
@@ -521,7 +521,7 @@ http.get(url, function(res){
     });
   
     res.on('end', function(){
-        var memresponse = JSON.parse(body);
+        var memresponse = JSON.parse();
         const memembed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Kot')
@@ -549,7 +549,7 @@ else if(command === `pies`){
     });
   
     res.on('end', function(){
-        var memresponse = JSON.parse(body);
+        var memresponse = JSON.parse();
         const memembed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Pies')
