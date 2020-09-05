@@ -17,6 +17,8 @@ let ts = `${hours}:${minutes}:${seconds} ${month}/${date}/${year}`;
 client.on('message', message => { 
   
 if (message.mentions.has(client.user)) {
+  if (message.content.has("@here")) return;
+  if (message.content.has("@everyone")) return;
   fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: @mention, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
     if (err) throw err;
 
@@ -71,7 +73,7 @@ http.get(url, function(res){
   })
   const helpembed = new Discord.MessageEmbed()
     .setTitle("Lista komend:")
-    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$borsuk` \n<:reddit:742766045340631070> Reddit: \n `$randompost [subreddit]`, `$dank`, `$pewdiepie`, `$eyebleach` \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
+    .setDescription("**:laughing: Zabawne:** \n `$gif`, `$polishmeme` , `$meme` \n **:frame_photo: Obrazy:**\n`$supreme [tekst]`, `$captcha [tekst]`, `$pies`, `$kot`, `$borsuk` \n<:reddit:742766045340631070> Reddit: \n `$randompost [subreddit]`, `$dank`, `$pewdiepie`, `$eyebleach` \n **:tools: Moderacyjne:**\n `$ban [@użytkownik]`, `$kick [@użytkownik]` \n **:information_source: Informacyjne:**\n `$help`, `$ping`, `$invite`")
     .setColor("111")
     .setTimestamp()
     .setAuthor(message.author.tag)
@@ -84,7 +86,7 @@ http.get(url, function(res){
       if (err) throw err;
   
   })
-  var url = 'http://meme-api.herokuapp.com/gimme/memy';
+  var url = 'https://ivall.pl/memy';
 
 http.get(url, function(res){
   var body = '';
@@ -98,7 +100,6 @@ http.get(url, function(res){
       const memembed = new Discord.MessageEmbed()
       .setColor('#0099ff')
       .setTitle('POLSKI MEM: ' + memresponse.title)
-      .setDescription ("Link: " + memresponse.postLink)
       .setImage(memresponse.url)
       .setTimestamp()
       .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
@@ -161,10 +162,8 @@ http.get(url, function(res){
         message.channel.send(embed).then(m =>{
             var ping = m.createdTimestamp - message.createdTimestamp;
             var embed = new Discord.MessageEmbed()
-            .setAuthor(`Pong! Twój ping to: ${ping} ms`)
+            .setAuthor(`Pong! ping bota to: ${ping} ms`)
             .setColor("111")
-            
-            
             m.edit(embed)
         });
   }
@@ -177,7 +176,7 @@ http.get(url, function(res){
       const res = await axios({
           url: 'https://multiapp.xyz/api/images/badgers',
           headers: {
-              token: "Sddv5AW1DoyS47QcFzKSQF"
+              token: "2vnP2GtxT196QWgPSbQ1eB"
           }
       })
       const embed = new Discord.MessageEmbed()
@@ -345,6 +344,15 @@ http.get(url, function(res){
       if (err) throw err;
   
   })
+  if (subreddit = ""){
+    const embed = new Discord.MessageEmbed()
+    .setColor('DARK_RED')
+    .setTitle(`Błąd`)
+    .setDescription ("Nie oznaczono subreddita \n Poprawne użycie:\n `$randompost [subrediit]`")
+    .setTimestamp()
+    .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+    message.channel.send(embed);
+  }
     var url = `http://meme-api.herokuapp.com/gimme/${subreddit}`;
 
     http.get(url, function(res){
@@ -396,7 +404,6 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var memresponse = JSON.parse(body);
-          if(message.channel.nsfw === false){
             if(memresponse.nsfw === true){
               const embed = new Discord.MessageEmbed()
               .setColor('#0099ff')
@@ -407,11 +414,10 @@ http.get(url, function(res){
               message.channel.send(embed);
               return;
             }
-          }
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/dankmemes/: ' + memresponse.title)
-          .setDescription ("Link: " + memresponse.postLink)
+          .setURL(memresponse.postLink)
           .setImage(memresponse.url)
           .setTimestamp()
           .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
@@ -437,7 +443,6 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var memresponse = JSON.parse(body);
-          if(message.channel.nsfw === false){
             if(memresponse.nsfw === true){
               const embed = new Discord.MessageEmbed()
               .setColor('#0099ff')
@@ -448,11 +453,10 @@ http.get(url, function(res){
               message.channel.send(embed);
               return;
             }
-          }
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/pewdiepiesubmissions/: ' + memresponse.title)
-          .setDescription ("Link: " + memresponse.postLink)
+          .setURL(memresponse.postLink)
           .setImage(memresponse.url)
           .setTimestamp()
           .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
@@ -478,7 +482,6 @@ http.get(url, function(res){
     
       res.on('end', function(){
           var memresponse = JSON.parse(body);
-          if(message.channel.nsfw === false){
             if(memresponse.nsfw === true){
               const embed = new Discord.MessageEmbed()
               .setColor('#0099ff')
@@ -489,11 +492,10 @@ http.get(url, function(res){
               message.channel.send(embed);
               return;
             }
-          }
           const memembed = new Discord.MessageEmbed()
           .setColor('#0099ff')
           .setTitle('/r/eyebleach/: ' + memresponse.title)
-          .setDescription ("Link: " + memresponse.postLink)
+          .setURL(memresponse.postLink)
           .setImage(memresponse.url)
           .setTimestamp()
           .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
@@ -502,8 +504,67 @@ http.get(url, function(res){
     }).on('error', function(e){
         console.log("Got an error: ", e);
     });
-  }
+ 
+ }
+  else if(command === `kot`){
+  fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: KOT, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    if (err) throw err;
+
+})
+  var url = 'http://api.alexflipnote.dev/cats';
+
+  http.get(url, function(res){
+    var body = '';
+  
+    res.on('data', function(chunk){
+        body += chunk;
+    });
+  
+    res.on('end', function(){
+        var memresponse = JSON.parse(body);
+        const memembed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Kot')
+        .setImage(memresponse.file)
+        .setTimestamp()
+        .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+        message.channel.send(memembed);
+    });
+  }).on('error', function(e){
+      console.log("Got an error: ", e);
   });
+}
+else if(command === `pies`){
+  fs.appendFile('/home/julek/funbot-logs/command.log', `\n ${ts} Command: PIES, Author: ${message.author.tag}(ID: ${message.author}), Guild: ${message.guild.name} (ID: ${message.guild.id}), Channel: ${message.channel.id}, Message: ${message.id}`, (err) => {
+    if (err) throw err;
+
+})
+  var url = 'http://api.alexflipnote.dev/dogs';
+
+  http.get(url, function(res){
+    var body = '';
+  
+    res.on('data', function(chunk){
+        body += chunk;
+    });
+  
+    res.on('end', function(){
+        var memresponse = JSON.parse(body);
+        const memembed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Pies')
+        .setImage(memresponse.file)
+        .setTimestamp()
+        .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
+        message.channel.send(memembed);
+    });
+  }).on('error', function(e){
+      console.log("Got an error: ", e);
+  });
+}
+// Nad tą linią komendy.
+});
+  
 
 client.on('ready', () => {
     console.log(`Zalogowano jako: ${client.user.tag}!`);
@@ -514,8 +575,7 @@ client.on('ready', () => {
     client.user.setActivity(`$help | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
   });
   client.on("guildCreate", guild => {
-    // This event triggers when the bot joins a guild.
-     // Filtering the channels to get only the text channels.
+
   const Channels = guild.channels.cache.filter(channel => channel.type == "text");
 
   // Creating an invite.
