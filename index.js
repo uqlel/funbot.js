@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const http = require('http');
+const http = require('https');
 const https = require('https');
 const axios = require('axios');
 const { prefix, token } = require('./config.json');
