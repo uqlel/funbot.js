@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const http = require('https');
+const http = require('http');
 const https = require('https');
 const axios = require('axios');
 const { prefix, token } = require('./config.json');
@@ -268,15 +268,6 @@ http.get(url, function(res){
   }
   else if(command === `randompost`){
     const subreddit = message.content.replace(prefix + "randompost ", "" ,)
-  if (subreddit = ""){
-    const embed = new Discord.MessageEmbed()
-    .setColor('DARK_RED')
-    .setTitle(`Błąd`)
-    .setDescription ("Nie oznaczono subreddita \n Poprawne użycie:\n `$randompost [subrediit]`")
-    .setTimestamp()
-    .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
-    message.channel.send(embed);
-  }
     var url = `http://meme-api.herokuapp.com/gimme/${subreddit}`;
 
     http.get(url, function(res){
