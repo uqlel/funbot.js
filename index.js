@@ -4,6 +4,10 @@ const https = require('https');
 const axios = require('axios');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
+function logsend(message) {
+  const channel = client.channels.cache.find(channel => channel.id === "763464033880899616")
+  channel.send(message)
+}
 client.on('message', async message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -47,7 +51,7 @@ http.get(url, function(res){
   else if(command === "polishmeme"){
   var url = 'https://ivall.pl/memy';
 
-http.get(url, function(res){
+https.get(url, function(res){
   var body = '';
 
   res.on('data', function(chunk){
@@ -58,7 +62,7 @@ http.get(url, function(res){
       var memresponse = JSON.parse(body);
       const memembed = new Discord.MessageEmbed()
       .setColor('#0099ff')
-      .setTitle('POLSKI MEM: ' + memresponse.title)
+      .setTitle('POLSKI MEM')
       .setImage(memresponse.url)
       .setTimestamp()
       .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
@@ -268,15 +272,6 @@ http.get(url, function(res){
   }
   else if(command === `randompost`){
     const subreddit = message.content.replace(prefix + "randompost ", "" ,)
-  if (subreddit = ""){
-    const embed = new Discord.MessageEmbed()
-    .setColor('DARK_RED')
-    .setTitle(`Błąd`)
-    .setDescription ("Nie oznaczono subreddita \n Poprawne użycie:\n `$randompost [subrediit]`")
-    .setTimestamp()
-    .setFooter("Komenda wywołana przez: " + message.author.tag, message.author.displayAvatarURL())
-    message.channel.send(embed);
-  }
     var url = `http://meme-api.herokuapp.com/gimme/${subreddit}`;
 
     http.get(url, function(res){
@@ -485,7 +480,7 @@ client.on('ready', () => {
       maxAge: 0,
       unique: true
   }).then(invite => {
-    console.log(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`);
+    logsend(`Dołączyłem do serwera: ${guild.name} (id: ${guild.id}). Ten serwer ma ${guild.memberCount} członków! Zaproszenie: https://discord.gg/${invite.code}`);
     client.user.setActivity(`@funbot.js | Serwery: ${client.guilds.cache.size}`), {type: 'LISTENING'};
   })
 });
