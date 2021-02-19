@@ -1,2 +1,2 @@
 # funbot.js
-Stary bot, wsm mój pierwszy więc kod do niczego 
+Stary bot, wsm mój pierwszy więc kod gówno 
