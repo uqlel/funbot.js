@@ -1,2 +1,2 @@
 # funbot.js
-Stary bot, wsm mój pierwszy więc kod gówno 
+mój pierwszy bot, discontinued
